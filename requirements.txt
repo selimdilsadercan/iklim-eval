@@ -1,0 +1,6 @@
+pandas
+numpy
+anthropic
+scikit-learn
+openpyxl
+ipykernel
