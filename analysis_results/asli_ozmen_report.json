@@ -3,7 +3,7 @@
     "student_name": "Asli Ozmen",
     "school": "Karaagac Ortaokulu",
     "class": "6C",
-    "generated_at": "2026-03-05T18:27:10.940159"
+    "generated_at": "2026-03-05T18:39:23.995933"
   },
   "stats": {
     "overall_score": 1.3,
@@ -21,7 +21,9 @@
     "message_count": 5
   },
   "qualitative_analysis": {
-    "engagement_level": "Bilinmiyor",
-    "summary_paragraph": "Özet oluşturulamadı."
+    "engagement_level": "Düşük",
+    "conversation_themes": ["Bitki bilimleri", "Temel kavramlar"],
+    "summary_paragraph": "Asli Özmen'in eğitim performansı düşük seviyede görünmektedir. Öğrencinin ortalama içerik puanı 0.4 olup, genel puanı 1.3'tür. Diyalog seviyesi genelde A kategorisinde olsa da, öğrencinin mesaj sayısı ve içerik kalitesi oldukça düşüktür. Öğrencinin konuşma temaları bitki bilimi ve temel kavramlar gibi sınırlı alanlarda kalmaktadır. Eğitimcilerin öğrencinin ilgisini çekecek ve daha kapsamlı konulara yönlendirecek yöntemler uygulamaları önerilir.",
+    "method": "llm"
   }
 }

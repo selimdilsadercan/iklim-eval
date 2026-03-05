@@ -7,28 +7,30 @@ from typing import Dict, Union
 from .prompts import create_content_prompt, create_dialog_prompt
 
 class Scorer:
-    def __init__(self, api_key: str = None, model: str = "claude-3-haiku-20240307"):
+    def __init__(self, api_key: str = None, model: str = None):
         self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
-        self.model = model
+        # Öncelik: parametre > env > varsayılan
+        self.model = model or os.environ.get("ANTHROPIC_MODEL", "claude-3-haiku-20240307")
         self.client = anthropic.Anthropic(api_key=self.api_key) if self.api_key else None
 
     @staticmethod
     def rule_based_content_score(features: Dict) -> int:
         """Notebook'taki kural tabanlı içerik puanlama mantığı"""
-        total_terms = features["basic_term_count"] + features["advanced_term_count"]
+        if not features: return 0
+        total_terms = features.get("basic_term_count", 0) + features.get("advanced_term_count", 0)
         if total_terms == 0: return 0
-        if features["advanced_term_count"] >= 1 and total_terms >= 2 and (features["has_reasoning"] or features["has_connection"]):
+        if features.get("advanced_term_count", 0) >= 1 and total_terms >= 2 and (features.get("has_reasoning") or features.get("has_connection")):
             return 3
-        if features["advanced_term_count"] >= 1: return 2
+        if features.get("advanced_term_count", 0) >= 1: return 2
         return 1
 
     @staticmethod
     def rule_based_dialog_score(features: Dict) -> str:
         """Notebook'taki kural tabanlı diyalog puanlama mantığı"""
-        if features["is_minimal"]: return "A"
-        if features["has_reasoning"] and not features["has_action"]: return "D"
-        if features["has_reasoning"] and features["word_count"] > 20: return "D"
-        if features["has_reference"] or features["has_action"]: return "C"
+        if not features or features.get("is_minimal"): return "A"
+        if features.get("has_reasoning") and not features.get("has_action"): return "D"
+        if features.get("has_reasoning") and features.get("word_count", 0) > 20: return "D"
+        if features.get("has_reference") or features.get("has_action"): return "C"
         return "B"
 
     def score_with_llm(self, message: str, features: Dict, score_type: str = "content") -> Dict:
@@ -39,7 +41,14 @@ class Scorer:
             return {"score": rule_score, "reasoning": "Sanal Ortam/Rule-based (API Key yok)", "method": "rule_based"}
 
         try:
-            prompt = create_content_prompt(message, features) if score_type == "content" else create_dialog_prompt(message, features)
+            # Prompt Seçimi
+            if score_type == "content":
+                prompt = create_content_prompt(message, features)
+            elif score_type == "dialog":
+                prompt = create_dialog_prompt(message, features)
+            else:
+                # Özet (Summary) gibi durumlar için gelen mesajın kendisini prompt olarak kullan
+                prompt = message 
             
             response = self.client.messages.create(
                 model=self.model,
