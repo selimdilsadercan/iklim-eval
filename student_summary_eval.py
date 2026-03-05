@@ -19,6 +19,10 @@ from datetime import datetime
 import pandas as pd
 import numpy as np
 import anthropic
+from dotenv import load_dotenv
+
+# .env dosyasındaki değişkenleri yükle
+load_dotenv()
 
 warnings.filterwarnings("ignore")
 

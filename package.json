@@ -2,9 +2,9 @@
   "name": "iklim-eval",
   "version": "1.0.0",
   "description": "Öğrenci mesaj analizi ve değerlendirme sistemi",
-  "main": "student_summary_eval.py",
+  "main": "main.py",
   "scripts": {
-    "eval": ".\\venv\\Scripts\\python.exe student_summary_eval.py",
+    "eval": ".\\venv\\Scripts\\python.exe main.py",
     "install-py": ".\\venv\\Scripts\\python.exe -m pip install -r requirements.txt",
     "venv-create": "python -m venv venv",
     "notebook": ".\\venv\\Scripts\\jupyter.exe notebook"
