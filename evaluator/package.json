@@ -1,0 +1,22 @@
+{
+  "name": "iklim-eval",
+  "version": "1.0.0",
+  "description": "Öğrenci mesaj analizi ve değerlendirme sistemi",
+  "main": "main.py",
+  "scripts": {
+    "eval": ".\\venv\\Scripts\\python.exe main.py",
+    "setup": "setup.bat",
+    "api": ".\\venv\\Scripts\\python.exe app.py",
+    "install-py": ".\\venv\\Scripts\\python.exe -m pip install -r requirements.txt",
+    "venv-create": "python -m venv venv",
+    "notebook": ".\\venv\\Scripts\\jupyter.exe notebook"
+  },
+  "keywords": [
+    "python",
+    "education",
+    "llm",
+    "evaluation"
+  ],
+  "author": "",
+  "license": "ISC"
+}

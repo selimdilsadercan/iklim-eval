@@ -1,20 +1,11 @@
 {
-  "name": "iklim-eval",
+  "name": "iklim-eval-monorepo",
   "version": "1.0.0",
-  "description": "Öğrenci mesaj analizi ve değerlendirme sistemi",
-  "main": "main.py",
+  "private": true,
+  "description": "İklim Eval Monorepo - Evaluator (Python), Backend (Encore), Frontend",
   "scripts": {
-    "eval": ".\\venv\\Scripts\\python.exe main.py",
-    "install-py": ".\\venv\\Scripts\\python.exe -m pip install -r requirements.txt",
-    "venv-create": "python -m venv venv",
-    "notebook": ".\\venv\\Scripts\\jupyter.exe notebook"
-  },
-  "keywords": [
-    "python",
-    "education",
-    "llm",
-    "evaluation"
-  ],
-  "author": "",
-  "license": "ISC"
+    "evaluator:setup": "cd evaluator && setup.bat",
+    "evaluator:api": "cd evaluator && npm run api",
+    "eval": "cd evaluator && npm run eval --"
+  }
 }

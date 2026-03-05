@@ -6,3 +6,6 @@ openpyxl
 ipykernel
 python-dotenv
 tqdm
+fastapi
+uvicorn
+python-multipart
